@@ -60,6 +60,7 @@ func NewUdon(p Portion, aburaage bool, ebiten int) Udon {
 // 疑問: NewKakeudon(100) みたいに iota の値を超過した値を渡してもコンパイルエラーにはならないが別途バリデーションを追加する以外に防ぐ方法はないか、、、
 // pro(s):
 //   利用側の記述量がすくない
+//   Udon の構造体のフィールドに変更があっても変更量は関数の数に比例する(利用側が多くても関数が少なければ修正は大変じゃない)
 // con(s):
 //
 func NewKakeudon(p Portion) *Udon {
@@ -88,9 +89,10 @@ func NewTempuraUdon(p Portion) *Udon {
 
 // 構造体を利用したオプション引数
 // pro(s):
-//   比較的少ない記述量でオプションが大量にある機能を記述できる
+//   オプションが大量にある機能を(定義側は)比較的少ない記述量で記述できる
 // con(s):
 //   ゼロ値やデフォルト引数の実装がやや面倒臭い(とはいえ全然面倒臭くないきはする)
+//   Option のフィールドの増減があった場合、利用側のコードを全箇所修正する必要がある
 type Option struct {
 	men      Portion
 	aburaage bool
@@ -107,9 +109,9 @@ func NewUdonUsingStruct(o Option) *Udon {
 
 // ビルダーを利用したオプション引数
 // pro(s):
-//   オプションを追加してもそのオプションを利用したい箇所だけを変更すればよいため変更量が少なくなる場合がある
+//   オプションを追加してもそのオプションを利用したい箇所だけを変更すればよいためたくさんある利用側のコードのうち一部だけを変更したいときは変更量が少なくてすむ
 // con(s):
-//
+//   pros の裏返しで、変更を利用側のコード全箇所に適用する場合は変更量が多くなる
 type fluentOpt struct {
 	men      Portion
 	aburaage bool
@@ -147,6 +149,7 @@ func (o *fluentOpt) Order() *Udon {
 // pro(s): Builder パターンは NewUdonUsingBuilder, order の2つのメソッドを呼ぶ必要があるのに比べて Functional Option パターンでは NewUdonUsingFunctionalOption 関数だけ呼べば同じことができるのでスッキリしていいかも
 //   オプションを追加してもそのオプションを利用したい箇所だけを変更すればよいため変更量が少なくなる場合がある
 // con(s):
+//   pros の裏返しで、変更を利用側のコード全箇所に適用する場合は変更量が多くなる
 type OptFunc func(r *Udon)
 
 func NewUdonUsingFunctionalOption(opts ...OptFunc) *Udon {
