@@ -1,8 +1,10 @@
 package main
 
-import "kyu08/jitsuyo-golang/optionArgs"
+import (
+	"kyu08/jitsuyo-golang/defer_"
+)
 
 func main() {
-	optionArgs.Main()
+	defer_.Main()
 	println("")
 }
