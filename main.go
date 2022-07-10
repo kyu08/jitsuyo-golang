@@ -1,10 +1,8 @@
 package main
 
-import (
-	"kyu08/jitsuyo-golang/defer_"
-)
+import "kyu08/jitsuyo-golang/time_"
 
 func main() {
-	defer_.Main()
+	time_.Main()
 	println("")
 }
