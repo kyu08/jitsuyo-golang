@@ -6,5 +6,6 @@ import (
 
 func main() {
 	maskcredential.Main()
-	println("")
+	// c := maskcredential.NewCondfidentialCustomer()
+	// fmt.Printf("%#v", c)
 }
