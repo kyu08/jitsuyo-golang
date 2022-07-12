@@ -1,8 +1,10 @@
 package main
 
-import "kyu08/jitsuyo-golang/time_"
+import (
+	maskcredential "kyu08/jitsuyo-golang/maskCredential"
+)
 
 func main() {
-	time_.Main()
+	maskcredential.Main()
 	println("")
 }

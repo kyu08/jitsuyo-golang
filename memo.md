@@ -18,3 +18,31 @@ func deferReturnSample(fname string) (err error) {
   return
 }
 ```
+
+## 型
+go だとこれはちゃんとコンパイル通らない
+
+```go
+type MyInt int64
+var int1 int64 = 1
+var myint MyInt = int1
+```
+
+### 型変換
+```go
+
+var i int
+
+type ErrorCode int
+
+var e ErrorCode
+
+i = e // error
+e = i // error
+
+
+e = ErrorCode(i)
+```
+
+
+
