@@ -44,5 +44,36 @@ e = i // error
 e = ErrorCode(i)
 ```
 
+# 構造体
+以下のように書くと構造体を埋め込んで共通部分を使いまわすことができる
+```go
 
+type struct Book {
+  ID string
+}
+
+type struct AmazonBook {
+  Book
+  isPrimeBook bool
+}
+```
+
+これは型同名のフィールドが宣言されたのと同じように振る舞う
+
+```go
+type struct AmazonBook {
+  Book Book
+  isPrimeBook bool
+}
+
+amazonBook := AmazonBook{
+  Book: Book{
+    ID: "id",
+  },
+  isPrimeBook: true,
+}
+
+// 呼び出すときはこんなかんじ
+id := amazonBook.Book.ID
+```
 
