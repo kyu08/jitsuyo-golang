@@ -98,3 +98,22 @@ if c, ok := r.(io.Closer); ok {
   c.Close()
 }
 ```
+
+# エラーハンドリング
+エラーに含まれる文字列を特定の文字列と比較する方法はアンチパターンである
+特定のエラーに応じたハンドリングが必要な場合は `errors.Is()`や`errors.As()` を使ってハンドリングする
+
+
+エラーをログ出力する際はどのような処理なのか、どのような引数を元に動いて、どんなエラーが発生したのか明確にわかるようんいエラーメッセージを記述するようにしよう
+```go
+user, err := getInvitedUserWithEmail(ctx, email) if err != nil {
+// 呼び出し先で発生したエラーをラップし、付加情報を付与して呼び出し元に返却
+return fmt.Errorf("fail to get invited user with email(%s): %w", email, err) }
+```
+
+
+
+
+
+
+
