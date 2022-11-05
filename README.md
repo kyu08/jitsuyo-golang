@@ -1,4 +1,4 @@
-## defer の注意点
+# defer の注意点
 `Close()` など、エラー処理のメソッドによってはエラーを返すケースもある
 この場合、普通に defer で呼ぶだけではエラーを取りこぼしてしまうため、無名関数で括ってそのエラーを名前付き返り値に代入すると呼び出しもとに返すことができる
 
@@ -19,7 +19,7 @@ func deferReturnSample(fname string) (err error) {
 }
 ```
 
-## 型
+# 型
 go だとこれはちゃんとコンパイル通らない
 
 ```go
@@ -110,10 +110,3 @@ user, err := getInvitedUserWithEmail(ctx, email) if err != nil {
 // 呼び出し先で発生したエラーをラップし、付加情報を付与して呼び出し元に返却
 return fmt.Errorf("fail to get invited user with email(%s): %w", email, err) }
 ```
-
-
-
-
-
-
-
