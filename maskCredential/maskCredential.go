@@ -2,7 +2,7 @@ package maskcredential
 
 import "fmt"
 
-type CondfidentialCustomer struct {
+type ConfidentialCustomer struct {
 	CustomerID int64
 	CreditCard CreditCard
 }
@@ -18,7 +18,7 @@ func (c CreditCard) GoString() string {
 }
 
 func Main() {
-	c := CondfidentialCustomer{
+	c := ConfidentialCustomer{
 		CustomerID: 123,
 		CreditCard: "1234-5678-9123-4567",
 	}
