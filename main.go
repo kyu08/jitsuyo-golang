@@ -1,52 +1,28 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"log"
 )
 
-var (
-	ErrRecordNotFound = errors.New("record not found")
-	ErrUnknown        = errors.New("unknown error")
+const (
+	a = iota + 1 // 1
+	b            // 2
+	c            // 3
+	_            // 4だが使われない
+	e            // 5
+	f = iota     // 6 iotaの値はリセットされない
+)
+
+const (
+	g = iota // 再び0になる
+	h        // 1
+	i        // 2
 )
 
 func main() {
-	userService := userService{}
-	if err := userService.Authenticate(); err != nil {
-		log.Fatal(err)
-	}
-}
-
-type userService struct {
-	userRepo userRepository
-}
-
-func (s *userService) Authenticate() error {
-	if err := s.userRepo.FindUser("hoge"); err != nil {
-		if errors.Is(err, ErrRecordNotFound) {
-			log.Print("ユーザーが存在しなかった場合のハンドリングをする")
-		} else {
-			return fmt.Errorf("failed to userRepo.FindUser: %w", err)
-		}
-	}
-	return nil
-}
-
-type userRepository struct {
-	db dbHandler
-}
-
-func (r *userRepository) FindUser(id string) error {
-	if err := r.db.Query("SELECT * FROM users WHERE id = ?", id); err != nil {
-		return fmt.Errorf("failed to find user: %w", err)
-	}
-	return nil
-}
-
-type dbHandler struct{}
-
-func (h *dbHandler) Query(sql string, args ...interface{}) error {
-	return ErrRecordNotFound
-	// return ErrUnknown
+	fmt.Printf("a: %v\n", a)
+	fmt.Printf("b: %v\n", b)
+	fmt.Printf("c: %v\n", c)
+	fmt.Printf("e: %v\n", e)
+	fmt.Printf("f: %v\n", f)
 }
